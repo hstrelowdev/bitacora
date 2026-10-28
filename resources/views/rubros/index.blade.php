@@ -28,7 +28,7 @@
             <td class="text-end">
                 <a href="{{ route('rubros.edit', $rubro) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
                 <form method="POST" action="{{ route('rubros.destroy', $rubro) }}" class="d-inline"
-                    onsubmit="return confirm('¿Eliminar este rubro?')">
+                    data-confirmar="¿Eliminar este rubro?" ('¿Eliminar este rubro?')">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-sm btn-outline-danger">Eliminar</button>
