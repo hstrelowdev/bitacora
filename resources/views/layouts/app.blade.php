@@ -12,11 +12,16 @@
     <nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
         <div class="container">
             <span class="navbar-brand">Bitácora</span>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('rubros.index') }}">Rubros</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('empresas.index') }}">Empresas</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('empleos.index') }}">Empleos</a></li>
             </ul>
+            <span class="navbar-text me-3">{{ auth()->user()->nombre }}</span>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="btn btn-sm btn-outline-light">Salir</button>
+            </form>
         </div>
     </nav>
 

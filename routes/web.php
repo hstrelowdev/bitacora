@@ -1,14 +1,22 @@
 <?php
 
-use App\Http\Controllers\RubroController;
-use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpleoController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RubroController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/rubros');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'show'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+});
 
-Route::resource('rubros', RubroController::class)->except('show');
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::resource('empresas', EmpresaController::class)->except('show');
+    Route::redirect('/', '/rubros');
 
-Route::resource('empleos', EmpleoController::class)->except('show');
+    Route::resource('rubros', RubroController::class)->except('show');
+    Route::resource('empresas', EmpresaController::class)->except('show');
+    Route::resource('empleos', EmpleoController::class)->except('show');
+});
