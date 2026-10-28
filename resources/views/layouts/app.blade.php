@@ -14,6 +14,7 @@
             <span class="navbar-brand">Bitácora</span>
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ route('rubros.index') }}">Rubros</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('empresas.index') }}">Empresas</a></li>
             </ul>
         </div>
     </nav>

@@ -6,4 +6,4 @@
     @method('PUT')
     @include('rubros._form')
 </form>
-@endsection
+@endsectione
