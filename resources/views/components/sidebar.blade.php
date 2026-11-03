@@ -5,7 +5,8 @@
     <ul class="nav nav-pills flex-column gap-1 mb-auto">
         <li class="text-uppercase small text-secondary mt-1 mb-1">Catálogos</li>
         <x-sidebar-link ruta="rubros.index">Rubros</x-sidebar-link>
-
+        <li class="text-uppercase small text-secondary mt-1 mb-1">Gestión</li>
+<x-sidebar-link ruta="solicitudes.index">Solicitudes</x-sidebar-link>
         <li class="text-uppercase small text-secondary mt-3 mb-1">Empresas</li>
         <x-sidebar-link ruta="empresas.index">Empresas</x-sidebar-link>
         <x-sidebar-link ruta="empleos.index">Empleos</x-sidebar-link>

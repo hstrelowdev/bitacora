@@ -2,31 +2,37 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-
 #[Fillable([
-    'empleo_id',
-    'titulo',
-    'descripcion',
-    'solicitante',
-    'prioridad',
-    'estado',
-    'fecha_solicitud',
-    'fecha_cierre',
-    'creado_por',
-    'asignado_a',
+    'empleo_id', 'titulo', 'descripcion', 'solicitante',
+    'prioridad', 'estado', 'fecha_solicitud', 'fecha_cierre',
+    'creado_por', 'asignado_a',
 ])]
-
 class Solicitud extends Model
 {
+    public const ESTADOS = [
+        'pendiente'  => 'Pendiente',
+        'en_proceso' => 'En proceso',
+        'terminada'  => 'Terminada',
+    ];
+
+    public const PRIORIDADES = [
+        'baja'  => 'Baja',
+        'media' => 'Media',
+        'alta'  => 'Alta',
+    ];
+
     protected $table = 'solicitudes';
 
-    protected $casts = [
-        'fecha_solicitud' => 'date',
-        'fecha_cierre'    => 'date',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'fecha_solicitud' => 'date',
+            'fecha_cierre'    => 'date',
+        ];
+    }
 
     public function empleo()
     {

@@ -4,6 +4,8 @@ use App\Http\Controllers\EmpleoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RubroController;
+use App\Http\Controllers\SolicitudController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -20,3 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('empresas', EmpresaController::class)->except('show');
     Route::resource('empleos', EmpleoController::class)->except('show');
 });
+
+Route::resource('solicitudes', SolicitudController::class)
+    ->parameters(['solicitudes' => 'solicitud'])
+    ->except('show');
