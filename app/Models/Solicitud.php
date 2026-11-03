@@ -51,6 +51,7 @@ class Solicitud extends Model
 
     public function historial()
     {
-        return $this->hasMany(Historial::class);
+
+    return $this->hasMany(Historial::class)->latest()->latest('id');
     }
 }
