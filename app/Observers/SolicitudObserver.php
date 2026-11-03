@@ -41,8 +41,8 @@ class SolicitudObserver
 
         return match ($campo) {
             'asignado_a' => User::find($valor)?->nombre ?? "#{$valor}",
-            'empleo_id'  => Empleo::find($valor)?->nombre ?? "#{$valor}",
-            default      => $valor,
+            'empleo_id' => Empleo::find($valor)?->nombre ?? "#{$valor}",
+            default => $valor,
         };
     }
 
@@ -54,12 +54,12 @@ class SolicitudObserver
         ?string $comentario = null
     ): void {
         Historial::create([
-            'solicitud_id'   => $solicitud->id,
-            'usuario_id'     => Auth::id(),
-            'campo'          => $campo,
+            'solicitud_id' => $solicitud->id,
+            'usuario_id' => Auth::id(),
+            'campo' => $campo,
             'valor_anterior' => $anterior,
-            'valor_nuevo'    => $nuevo,
-            'comentario'     => $comentario,
+            'valor_nuevo' => $nuevo,
+            'comentario' => $comentario,
         ]);
     }
 }

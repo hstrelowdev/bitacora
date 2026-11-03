@@ -2,26 +2,47 @@
 
 namespace App\Models;
 
+use App\Observers\SolicitudObserver;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
-    'empleo_id', 'titulo', 'descripcion', 'solicitante',
-    'prioridad', 'estado', 'fecha_solicitud', 'fecha_cierre',
-    'creado_por', 'asignado_a',
+    'empleo_id',
+    'titulo',
+    'descripcion',
+    'solicitante',
+    'prioridad',
+    'estado',
+    'fecha_solicitud',
+    'fecha_cierre',
+    'creado_por',
+    'asignado_a',
 ])]
+#[ObservedBy(SolicitudObserver::class)]
 class Solicitud extends Model
 {
+    public const CAMPOS = [
+        'titulo' => 'título',
+        'descripcion' => 'descripción',
+        'solicitante' => 'solicitante',
+        'prioridad' => 'prioridad',
+        'estado' => 'estado',
+        'fecha_solicitud' => 'fecha de solicitud',
+        'empleo_id' => 'empleo',
+        'asignado_a' => 'asignado a',
+    ];
+
     public const ESTADOS = [
-        'pendiente'  => 'Pendiente',
+        'pendiente' => 'Pendiente',
         'en_proceso' => 'En proceso',
-        'terminada'  => 'Terminada',
+        'terminada' => 'Terminada',
     ];
 
     public const PRIORIDADES = [
-        'baja'  => 'Baja',
+        'baja' => 'Baja',
         'media' => 'Media',
-        'alta'  => 'Alta',
+        'alta' => 'Alta',
     ];
 
     protected $table = 'solicitudes';
@@ -30,7 +51,7 @@ class Solicitud extends Model
     {
         return [
             'fecha_solicitud' => 'date',
-            'fecha_cierre'    => 'date',
+            'fecha_cierre' => 'date',
         ];
     }
 
@@ -51,7 +72,6 @@ class Solicitud extends Model
 
     public function historial()
     {
-
-    return $this->hasMany(Historial::class)->latest()->latest('id');
+        return $this->hasMany(Historial::class)->latest()->latest('id');
     }
 }

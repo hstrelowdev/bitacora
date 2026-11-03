@@ -37,12 +37,14 @@ class SolicitudController extends Controller
 
     public function edit(Solicitud $solicitud)
     {
+        $solicitud->load('historial.usuario');
+
         return view('solicitudes.edit', $this->opciones() + ['solicitud' => $solicitud]);
     }
 
     public function update(Request $request, Solicitud $solicitud)
     {
-        $solicitud->update($this->completar($this->validar($request)));
+        $solicitud->update($this->completar($this->validar($request), $solicitud));
 
         return redirect()->route('solicitudes.index')->with('ok', 'Solicitud actualizada.');
     }
@@ -57,7 +59,7 @@ class SolicitudController extends Controller
     private function opciones(): array
     {
         return [
-            'empleos'  => Empleo::with('empresa')->orderBy('nombre')->get(),
+            'empleos' => Empleo::with('empresa')->orderBy('nombre')->get(),
             'usuarios' => User::orderBy('nombre')->get(),
         ];
     }
@@ -65,20 +67,22 @@ class SolicitudController extends Controller
     private function validar(Request $request): array
     {
         return $request->validate([
-            'empleo_id'       => 'required|exists:empleos,id',
-            'titulo'          => 'required|string|max:255',
-            'descripcion'     => 'nullable|string',
-            'solicitante'     => 'required|string|max:255',
-            'prioridad'       => ['required', Rule::in(array_keys(Solicitud::PRIORIDADES))],
-            'estado'          => ['required', Rule::in(array_keys(Solicitud::ESTADOS))],
+            'empleo_id' => 'required|exists:empleos,id',
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'solicitante' => 'required|string|max:255',
+            'prioridad' => ['required', Rule::in(array_keys(Solicitud::PRIORIDADES))],
+            'estado' => ['required', Rule::in(array_keys(Solicitud::ESTADOS))],
             'fecha_solicitud' => 'required|date',
-            'asignado_a'      => 'nullable|exists:usuarios,id',
+            'asignado_a' => 'nullable|exists:usuarios,id',
         ]);
     }
 
-    private function completar(array $datos): array
+    private function completar(array $datos, ?Solicitud $solicitud = null): array
     {
-        $datos['fecha_cierre'] = $datos['estado'] === 'terminada' ? now()->toDateString() : null;
+        $datos['fecha_cierre'] = $datos['estado'] === 'terminada'
+            ? ($solicitud?->fecha_cierre ?? now()->toDateString())
+            : null;
 
         return $datos;
     }

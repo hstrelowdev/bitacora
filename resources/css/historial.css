@@ -1,0 +1,36 @@
+.historial-lista {
+    list-style: none;
+    padding-left: 1rem;
+    border-left: 2px solid var(--bs-border-color);
+}
+
+.historial-item {
+    position: relative;
+    padding: 0.5rem 0 0.5rem 1rem;
+}
+
+.historial-item::before {
+    content: "";
+    position: absolute;
+    left: -1.4rem;
+    top: 0.9rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--bs-primary);
+}
+
+.historial-fecha {
+    color: var(--bs-secondary-color);
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+
+.historial-usuario {
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.historial-vacio {
+    color: var(--bs-secondary-color);
+}
