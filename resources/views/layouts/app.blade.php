@@ -9,6 +9,7 @@
     <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
     <script src="{{ asset('js/sidebar.js') }}" defer></script>
     <script src="{{ asset('js/confirmar.js') }}" defer></script>
+    @stack('estilos')
 </head>
 
 <body class="bg-light">

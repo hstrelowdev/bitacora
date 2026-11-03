@@ -1,4 +1,3 @@
-@stack('estilos')
 @props(['item'])
 
 <li class="historial-item">

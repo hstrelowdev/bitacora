@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
         }
 
         User::firstOrCreate(
-            ['email' => 'admin@bitacora.test'],
+            ['email' => 'test@bitacora.test'],
             [
                 'nombre'   => 'Administrador',
-                'password' => Hash::make('cambiar-esta-clave'),
+                'password' => Hash::make('admin1234'),
                 'rol'      => 'admin',
             ]
         );
