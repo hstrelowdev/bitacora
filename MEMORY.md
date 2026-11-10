@@ -5,6 +5,7 @@
 - El comando de OpenCode `feature` vive en `.opencode/commands/feature.md`.
 - El comando `probar-flujo` vive en `.opencode/commands/probar-flujo.md` y estandariza la verificación del flujo crítico.
 - `opencode.json` y `skills-lock.json` están en `.gitignore`; se versiona `opencode.example.json` sin credenciales.
+- La primera spec vive en `specs/001/error-checklist/error-checklist.md` y documenta los hallazgos del flujo crítico.
 
 ### Decisiones importantes
 - La carpeta `commands` se movió a `.opencode/commands/` porque OpenCode descubre los comandos de proyecto en `.opencode/commands/*.md`. Se eliminó un archivo vacío llamado `.opencode` que impedía crear el directorio.
@@ -13,6 +14,7 @@
 - Se creó `probar-flujo.md` para repetir la prueba del flujo sin reexplicar el checklist cada vez.
 - Se corrigió el frontmatter de `feature.md` (faltaba el `---` de cierre) y se reemplazó `@MEMORY.md` por una instrucción explícita de lectura.
 - Se ignoró `opencode.json` porque contiene una API key local y se creó `opencode.example.json` con `{env:CONTEXT7_API_KEY}`. También se ignoró `skills-lock.json`; `.agents/skills` y `docs/` siguen versionados.
+- La primera spec usa la estructura `specs/001/error-checklist/error-checklist.md`: `001` es el número secuencial de la spec y `error-checklist` es el nombre descriptivo del documento.
 
 ### Errores a evitar
 - `php artisan test` tiene 1 fallo preexistente: `ExampleTest` espera 200 en `/`, pero `/` redirige a `/login` (302). Usar `actingAs()` en tests de feature.
@@ -20,3 +22,4 @@
 - En comandos guardados de OpenCode, `@archivo` no adjunta el archivo; hay que pedir explícitamente que se lea (por ejemplo, `lee MEMORY.md`).
 - No commitear `opencode.json`; usar `opencode.example.json` y definir `CONTEXT7_API_KEY` en el entorno.
 - `.agents/skills/local-dates` pertenece al Diario de Estudio, no a Bitácora; no aplicarlo aquí.
+- Hallazgos abiertos documentados en `specs/001/error-checklist/error-checklist.md`: `/solicitudes` fuera de `auth` (500 sin sesión), roles sin aplicar, filtros/conteos ausentes, `data-confirmar` mal formado, paginación con estilos Tailwind y README con `name` en vez de `nombre`.
